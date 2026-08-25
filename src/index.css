@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+:root {
+  --butter: #FBEFD4;
+  --peach: #FAD9C1;
+  --coral: #F2765A;
+  --lilac: #D9C7EE;
+  --mint: #BFE3CE;
+  --cream: #FFF9F0;
+  --sand: #F2E3C6;
+  --ochre: #E0A458;
+  --terra: #C96B4A;
+  --rose-bg: #F7DAD6;
+  --rose-ink: #7A4442;
+  --lilac-bg: #EFE8FA;
+  --lilac-deep: #7A6BA8;
+  --mint-bg: #DFF3E4;
+  --ink: #4A3728;
+  --ink-soft: #7a6a58;
+  --paper: #FFFDF8;
+  --font-serif: 'Fraunces', 'Manjari', serif;
+  --font-ui: 'Outfit', 'Manjari', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  overflow-x: hidden;
+  selection-background-color: var(--coral);
+  selection-color: #ffffff;
+}
+
+::selection {
+  background: var(--coral);
+  color: #fff;
+}
+
+.font-serif-custom {
+  font-family: var(--font-serif);
+}
+
+.font-mono-custom {
+  font-family: var(--font-mono);
+}
+
+.font-ui-custom {
+  font-family: var(--font-ui);
+}
+
+/* Texture Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Custom transitions and utilities */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.92); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseSpiceDot {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(242, 118, 90, 0.7); }
+  50% { transform: scale(1.15); opacity: 0.85; box-shadow: 0 0 0 8px rgba(242, 118, 90, 0); }
+}
+
+.animate-pulse-spice {
+  animation: pulseSpiceDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 12. Mesh Gradient Drift Keyframes (Peach, Butter, Lilac, Mint - 60vmax, 18-30s alternate) */
+@keyframes meshDrift1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(8vw, -6vh, 0) scale(1.12); }
+  100% { transform: translate3d(-5vw, 7vh, 0) scale(0.94); }
+}
+
+@keyframes meshDrift2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-7vw, 8vh, 0) scale(1.18); }
+  100% { transform: translate3d(6vw, -5vh, 0) scale(0.92); }
+}
+
+@keyframes meshDrift3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 6vh, 0) scale(1.15); }
+  100% { transform: translate3d(-8vw, -4vh, 0) scale(0.88); }
+}
+
+@keyframes meshDrift4 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-6vw, -7vh, 0) scale(1.1); }
+  100% { transform: translate3d(7vw, 5vh, 0) scale(0.95); }
+}
+
+.mesh-blob-peach {
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 45% 45%, rgba(250, 217, 193, 0.85) 0%, rgba(250, 217, 193, 0.4) 45%, transparent 70%);
+  animation: meshDrift1 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.mesh-blob-butter {
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 50% 50%, rgba(251, 239, 212, 0.9) 0%, rgba(251, 239, 212, 0.45) 45%, transparent 70%);
+  animation: meshDrift2 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.mesh-blob-lilac {
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 40% 60%, rgba(217, 199, 238, 0.75) 0%, rgba(217, 199, 238, 0.35) 45%, transparent 70%);
+  animation: meshDrift3 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.mesh-blob-mint {
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 55% 40%, rgba(191, 227, 206, 0.75) 0%, rgba(191, 227, 206, 0.35) 45%, transparent 70%);
+  animation: meshDrift4 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* 13. Floating 3D Shapes (±22px bob at 7s / 8.5s) */
+@keyframes bobSphere {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+  100% { transform: translateY(22px) rotate(-3deg); }
+}
+
+@keyframes bobCapsule {
+  0% { transform: translateY(0px) rotate(14deg); }
+  50% { transform: translateY(22px) rotate(18deg); }
+  100% { transform: translateY(-22px) rotate(10deg); }
+}
+
+.floating-3d-sphere {
+  animation: bobSphere 7s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.floating-3d-capsule {
+  animation: bobCapsule 8.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* 16. Topo Contours Drift (22s - 34s sine loops) */
+@keyframes topoDriftA {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(12px, -8px) rotate(2.5deg); }
+  100% { transform: translate(-10px, 10px) rotate(-2deg); }
+}
+
+@keyframes topoDriftB {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-14px, 12px) rotate(-3deg); }
+  100% { transform: translate(10px, -6px) rotate(2deg); }
+}
+
+@keyframes topoDriftC {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(8px, 14px) rotate(2deg); }
+  100% { transform: translate(-12px, -10px) rotate(-2.5deg); }
+}
+
+.topo-drift-a {
+  animation: topoDriftA 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.topo-drift-b {
+  animation: topoDriftB 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.topo-drift-c {
+  animation: topoDriftC 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* 19. Ink-flow headline (#coral -> #ochre -> #coral, 220% background-size, 7s linear loop) */
+@keyframes inkFlowText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ink-flow-headline {
+  background: linear-gradient(90deg, #F2765A 0%, #E0A458 50%, #F2765A 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: inkFlowText 7s linear infinite;
+  will-change: background-position;
+}
+
+/* 22. Poster Sway (±0.5° on 5s sine loop) */
+@keyframes posterSwayLoop {
+  0%, 100% { transform: perspective(800px) rotate(-0.5deg); }
+  50% { transform: perspective(800px) rotate(0.5deg); }
+}
+
+.poster-sway {
+  animation: posterSwayLoop 5s ease-in-out infinite;
+}
+
+/* Bento tile color-matched hover shadows */
+.bento-mint-shadow:hover {
+  box-shadow: 10px 14px 0px rgba(46, 110, 78, 0.45);
+}
+
+.bento-amber-shadow:hover {
+  box-shadow: 10px 14px 0px rgba(224, 164, 88, 0.55);
+}
+
+.bento-butter-shadow:hover {
+  box-shadow: 10px 14px 0px rgba(201, 107, 74, 0.45);
+}
+
+.bento-gradient-shadow:hover {
+  box-shadow: 10px 14px 0px rgba(122, 107, 168, 0.5);
+}
+
+.bento-coral-shadow:hover {
+  box-shadow: 10px 14px 0px rgba(242, 118, 90, 0.5);
+}
+
+/* 24. Polaroid tape (Each passport has ::before tape strip: peach gradient, rotated -4°, dispenser-style) */
+.polaroid-tape-card {
+  position: relative;
+}
+
+.polaroid-tape-card::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 124px;
+  height: 28px;
+  background: linear-gradient(135deg, rgba(255, 214, 165, 0.88) 0%, rgba(255, 238, 215, 0.95) 50%, rgba(255, 214, 165, 0.88) 100%);
+  box-shadow: 0 2px 4px rgba(74, 55, 40, 0.12);
+  border-left: 2px dashed rgba(199, 91, 57, 0.35);
+  border-right: 2px dashed rgba(199, 91, 57, 0.35);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+/* Steam/Mist animations */
+@keyframes mistDrift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  50% { transform: translate(-30px, -20px) scale(1.1); opacity: 0.6; }
+  100% { transform: translate(20px, -40px) scale(1.05); opacity: 0.35; }
+}
+
+/* 28. Warm aurora: 3 pastel radial blobs (peach/mint/lilac) on butter bg, multiply blend, drift keyframes 16–22s — compositor-only */
+@keyframes auroraBlob1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(60px, -45px, 0) scale(1.15); }
+  66% { transform: translate3d(-40px, 35px, 0) scale(0.92); }
+}
+
+@keyframes auroraBlob2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(-55px, 50px, 0) scale(1.12); }
+  66% { transform: translate3d(45px, -30px, 0) scale(0.88); }
+}
+
+@keyframes auroraBlob3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(40px, 40px, 0) scale(0.9); }
+  66% { transform: translate3d(-50px, -50px, 0) scale(1.18); }
+}
+
+.animate-aurora-1 {
+  animation: auroraBlob1 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-2 {
+  animation: auroraBlob2 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-3 {
+  animation: auroraBlob3 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-mist-drift {
+  animation: mistDrift 14s ease-in-out infinite alternate;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #d8c8b4;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terra);
+}

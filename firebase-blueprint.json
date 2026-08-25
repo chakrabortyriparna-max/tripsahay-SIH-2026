@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "waitlist": {
+      "title": "Waitlist",
+      "description": "Android app launch waitlist registrations",
+      "properties": {
+        "email": { "type": "string", "description": "User email address" },
+        "name": { "type": "string", "description": "User name or alias" },
+        "device": { "type": "string", "description": "Phone model" },
+        "androidVersion": { "type": "string", "description": "OS version" },
+        "trackingPreference": { "type": "string", "description": "Battery vs High-Fidelity preference" },
+        "createdAt": { "type": "timestamp", "description": "Sign-up time" },
+        "status": { "type": "string", "description": "Current status" },
+        "wave": { "type": "string", "description": "Rollout batch" }
+      },
+      "required": ["email"]
+    },
+    "trips": {
+      "title": "Trips",
+      "description": "Resurrected and recorded travel memories",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "title": { "type": "string", "description": "Trip name" },
+        "year": { "type": "number", "description": "Year of trip" },
+        "distanceKm": { "type": "number", "description": "Distance traveled" },
+        "days": { "type": "number", "description": "Duration in days" },
+        "category": { "type": "string", "description": "Category: WALK, FERRY, HILLS, ROADTRIP" },
+        "waypoints": { "type": "array", "description": "Recorded GPS stops" },
+        "createdAt": { "type": "timestamp", "description": "Record creation time" }
+      },
+      "required": ["title", "distanceKm"]
+    },
+    "ai_stories": {
+      "title": "AI Travel Stories",
+      "description": "Gemini-synthesized Risograph travel chronicles",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID" },
+        "tripTitle": { "type": "string", "description": "Trip name" },
+        "headline": { "type": "string", "description": "Generated poetic title" },
+        "narrative": { "type": "string", "description": "Literary narrative paragraphs" },
+        "culturalFootprints": { "type": "array", "description": "Cultural highlights" },
+        "postalStampBlurb": { "type": "string", "description": "Stamp quote" },
+        "risographPalette": { "type": "array", "description": "Ink hex codes" },
+        "createdAt": { "type": "timestamp", "description": "Generation timestamp" }
+      }
+    }
+  }
+}

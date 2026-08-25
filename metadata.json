@@ -1,0 +1,6 @@
+{
+  "name": "TripSahay",
+  "description": "TripSahay full-stack travel preservation app with Firebase Auth & Firestore, Gemini 3.7 Flash AI concierge with safety guardrails and golden dataset evaluation, Lenis smooth scrolling, and GSAP animations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
